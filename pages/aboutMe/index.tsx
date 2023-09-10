@@ -1,15 +1,41 @@
 import Link from "next/link";
-import { ArticleCard } from "../components/ArticleCard";
+import { ArticleCard } from "@/app/components/ArticleCard";
 import { faCamera, faCode, faHiking } from "@fortawesome/free-solid-svg-icons";
-import reactLogo from "@/public/react-logo.svg";
-import jekyllLogo from "@/public/jekyll-logo.svg";
-import viteLogo from "@/public/vite-logo.svg";
 import {
   ListEntryFa,
   ListEntryImage,
-} from "../components/ArticleCard/ListEntry";
+} from "@/app/components/ArticleCard/ListEntry";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import { client, urlFor } from "@/components/sanityClient";
 
-export default function AboutMe() {
+type iconType = {
+  asset: {
+    _type: string;
+    _ref: string;
+  };
+  type: string;
+};
+
+type Repo = {
+  icon: iconType;
+  title: string;
+}[];
+
+export const getStaticProps: GetStaticProps<{ repo: Repo }> = async () => {
+  console.log("[getStaticProps - 'test']", "test");
+  const data = await client.fetch('*[_type=="stackEntry"]');
+
+  return {
+    props: {
+      repo: data,
+    },
+  };
+};
+
+export default function Page({
+  repo,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log("[Page - repo]", repo);
   return (
     <section className="my-4">
       <h1 className="mb-4 text-4xl font-bold text-center"> O sobie </h1>
@@ -32,21 +58,20 @@ export default function AboutMe() {
           </ul>
         </ArticleCard>
         <ArticleCard title="Stack">
-          <ul className="flex flex-col flex-wrap gap-4 justify-center items-center">
-            <ListEntryImage file={reactLogo} alt="React logo" title="ReactJS" />
-            <ListEntryImage file={viteLogo} alt="Vite logo" title="ViteJS" />
-            <ListEntryImage
-              file={jekyllLogo}
-              alt="Jekyll logo"
-              title="Jekyll"
-            />
+          <ul className="flex relative flex-col flex-wrap gap-4 justify-center items-center">
+            {repo.map((entry) => (
+              <ListEntryImage
+                key={entry.icon.asset._ref}
+                title={entry.title}
+                file={urlFor(entry.icon.asset._ref)
+                  .format("png")
+                  .height(32)
+                  .maxWidth(400)
 
-            <li> Webpack </li>
-            <li> VueJS </li>
-            <li> NextJS </li>
-            <li> Gitlab CI </li>
-            <li> Python </li>
-            <li> Kotlin </li>
+                  .url()}
+                alt={entry.icon.type}
+              />
+            ))}
           </ul>
         </ArticleCard>
         <ArticleCard title="Programy">
