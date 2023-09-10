@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 import luna from "@/public/luna-low-res.jpg";
 import Image from "next/image";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -18,8 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <nav className="flex flex-row flex-wrap gap-4 py-4 shadow-lg lg:px-28 bg-mustard">
+      <body className="pt-24">
+        <nav className="flex fixed top-0 z-50 flex-row flex-wrap gap-4 py-4 px-4 w-screen shadow-lg lg:px-28 bg-mustard">
           <div>
             <Link href="/" className="flex-1">
               <Image
@@ -39,7 +40,7 @@ export default function RootLayout({
             <Link href="/contact"> Kontakt </Link>
           </div>
         </nav>
-        <main className="container mx-auto">{children}</main>
+        <main className="container px-4 mx-auto">{children}</main>
         <footer></footer>
       </body>
     </html>
