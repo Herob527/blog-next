@@ -27,7 +27,7 @@ type propsImage = {
 const ListEntryImage = ({ title, file, alt }: propsImage) => {
   return (
     <li className="flex relative flex-col flex-1 gap-2 items-center text-center">
-      <Image src={file} fill alt={alt} objectFit="contain" />
+      <Image src={file} fill alt={alt} className="object-contain" priority />
       <span>{title}</span>
     </li>
   );

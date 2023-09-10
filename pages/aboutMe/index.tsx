@@ -66,8 +66,6 @@ export default function Page({
                 file={urlFor(entry.icon.asset._ref)
                   .format("png")
                   .height(32)
-                  .maxWidth(400)
-
                   .url()}
                 alt={entry.icon.type}
               />
