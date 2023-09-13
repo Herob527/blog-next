@@ -10,7 +10,7 @@ const ArticleCard = ({ title, children }: props) => (
     <h1 className="absolute top-0 left-1/2 px-4 max-w-full bg-white border-2 border-blue-500 -translate-x-1/2 -translate-y-1/2">
       {title}
     </h1>
-    <div className="mt-2">{children}</div>
+    <div className="mt-2 h-full">{children}</div>
   </article>
 );
 

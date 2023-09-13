@@ -58,14 +58,14 @@ export default function Page({
           </ul>
         </ArticleCard>
         <ArticleCard title="Stack">
-          <ul className="flex relative flex-col flex-wrap gap-4 justify-center items-center">
+          <ul className="flex relative flex-row flex-wrap gap-4 justify-center items-center h-full">
             {repo.map((entry) => (
               <ListEntryImage
                 key={entry.icon.asset._ref}
                 title={entry.title}
                 file={urlFor(entry.icon.asset._ref)
                   .format("png")
-                  .height(32)
+                  .height(64)
                   .url()}
                 alt={entry.icon.type}
               />
