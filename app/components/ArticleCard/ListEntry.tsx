@@ -11,7 +11,7 @@ type props = {
 
 const ListEntryFa = ({ title, icon }: props) => {
   return (
-    <li className="flex flex-col flex-1 gap-2 items-center text-center">
+    <li className="flex flex-col gap-2 items-center text-center">
       <FontAwesomeIcon icon={icon} width={32} height={32} />
       <span>{title}</span>
     </li>

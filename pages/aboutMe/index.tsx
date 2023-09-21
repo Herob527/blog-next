@@ -39,9 +39,9 @@ export default function Page({
   return (
     <section className="my-4">
       <h1 className="mb-4 text-4xl font-bold text-center"> O sobie </h1>
-      <div className="flex flex-row flex-wrap gap-6">
+      <div className="flex flex-col flex-wrap gap-6">
         <ArticleCard title="Na wstępie">
-          <div>
+          <div className="flex flex-col justify-center items-center">
             <p> Yo! </p>
             <p>
               Na imię mam Szymon, jednak w internecie używam nicku
@@ -51,14 +51,14 @@ export default function Page({
           </div>
         </ArticleCard>
         <ArticleCard title="Zainteresowania">
-          <ul className="flex flex-col flex-wrap gap-4 justify-center items-center">
+          <ul className="flex flex-row flex-wrap gap-4 justify-center items-center">
             <ListEntryFa icon={faCamera} title="Fotografowanie zwierząt" />
             <ListEntryFa icon={faHiking} title="Poznawanie okolic" />
             <ListEntryFa icon={faCode} title="Programowanie" />
           </ul>
         </ArticleCard>
         <ArticleCard title="Stack">
-          <ul className="flex relative flex-row flex-wrap gap-4 justify-center items-center h-full">
+          <ul className="flex relative flex-row flex-wrap gap-8 justify-center items-center mx-auto max-w-sm h-full">
             {repo.map((entry) => (
               <ListEntryImage
                 key={entry.icon.asset._ref}
@@ -73,7 +73,7 @@ export default function Page({
           </ul>
         </ArticleCard>
         <ArticleCard title="Programy">
-          <ul>
+          <ul className="flex flex-col flex-wrap gap-4 justify-center items-center">
             <li>
               <Link
                 href="https://github.com/Herob527/nvim"
