@@ -16,26 +16,40 @@ type iconType = {
   type: string;
 };
 
-type Repo = {
+type stackEntry = {
   icon: iconType;
   title: string;
-}[];
+};
 
-export const getStaticProps: GetStaticProps<{ repo: Repo }> = async () => {
-  console.log("[getStaticProps - 'test']", "test");
-  const data = await client.fetch('*[_type=="stackEntry"]');
+type techEntry = {
+  name: string;
+  icon: iconType;
+  iconAlt: string;
+  link: string;
+};
+
+type staticProps = {
+  stack: stackEntry[];
+  usedTech: techEntry[];
+};
+
+export const getStaticProps: GetStaticProps<staticProps> = async () => {
+  const stack = await client.fetch('*[_type=="stackEntry"]');
+  const usedTech = await client.fetch('*[_type=="usedPrograms"]');
 
   return {
     props: {
-      repo: data,
+      stack,
+      usedTech,
     },
   };
 };
 
 export default function Page({
-  repo,
+  stack: repo,
+  usedTech,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log("[Page - repo]", repo);
+  console.log("[Page - repo]", usedTech);
   return (
     <section className="my-4">
       <h1 className="mb-4 text-4xl font-bold text-center"> O sobie </h1>
@@ -73,20 +87,25 @@ export default function Page({
           </ul>
         </ArticleCard>
         <ArticleCard title="Programy">
-          <ul className="flex flex-col flex-wrap gap-4 justify-center items-center">
-            <li>
-              <Link
-                href="https://github.com/Herob527/nvim"
-                title="Link do konfiguracji"
-                className="text-blue-500"
-              >
-                NeoVim
-              </Link>
-            </li>
-            <li>Android Studio</li>
-            <li>Ubuntu</li>
-            <li>Ranger jako file manager</li>
-            <li>LazyGit</li>
+          <ul className="flex relative flex-row flex-wrap gap-8 justify-center items-center mx-auto max-w-sm h-full">
+            {usedTech.map((entry) => (
+              <ListEntryImage
+                key={entry.name}
+                title={
+                  <Link
+                    href={entry.link}
+                    className="text-blue-500 whitespace-nowrap visited:text-purple-700"
+                  >
+                    {entry.name}
+                  </Link>
+                }
+                file={urlFor(entry.icon.asset._ref)
+                  .format("png")
+                  .height(64)
+                  .url()}
+                alt={entry.iconAlt}
+              />
+            ))}
           </ul>
         </ArticleCard>
         <ArticleCard title="Praca">
