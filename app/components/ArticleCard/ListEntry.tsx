@@ -19,7 +19,7 @@ const ListEntryFa = ({ title, icon }: props) => {
 };
 
 type propsImage = {
-  title: string;
+  title: string | JSX.Element;
   file: string;
   alt: string;
 };
@@ -27,7 +27,7 @@ type propsImage = {
 const ListEntryImage = ({ title, file, alt }: propsImage) => {
   return (
     <li className="inline-flex relative flex-col flex-1 items-center text-center">
-      <div className="relative w-12 h-12">
+      <div className="relative mb-2 w-12 h-12">
         <Image src={file} fill alt={alt} className="object-contain" priority />
       </div>
       <span>{title}</span>
