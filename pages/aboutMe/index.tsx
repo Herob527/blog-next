@@ -135,7 +135,7 @@ export default function Page({
                       "--width": `${containerWidth}px`,
                     } as React.CSSProperties
                   }
-                  className={`-ml-1 inline-block absolute top-0 left-0 w-6 h-6 bg-white rounded-full border-4 border-blue-500 transition-transform duration-500 cursor-pointer translate-x-[calc(var(--width)/(var(--arr-length))*var(--i))] -translate-y-1/2 hover:scale-125`}
+                  className={`-ml-1 last:-ml-6 opacity-50 inline-block absolute top-0 left-0 w-6 h-6 bg-white rounded-full border-4 border-blue-500 transition-transform duration-500 cursor-pointer translate-x-[calc(var(--width)/(var(--arr-length))*var(--i))] -translate-y-1/2 hover:scale-125`}
                 ></span>
               ))}
           </div>
