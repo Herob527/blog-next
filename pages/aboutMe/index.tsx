@@ -5,9 +5,8 @@ import {
   ListEntryFa,
   ListEntryImage,
 } from "@/app/components/ArticleCard/ListEntry";
-import type { InferGetStaticPropsType } from "next";
+import type { InferGetServerSidePropsType } from "next";
 import { client, urlFor } from "@/components/sanityClient";
-import { TimeLine } from "@/components/Timeline";
 import {
   GET_ALL_STACK_QUERY,
   GetAllStackQueryType,
@@ -16,16 +15,26 @@ import {
   GET_PROGRAMS_QUERY,
   GetProgramsQueryType,
 } from "@/queries/programEntries";
+import {
+  GET_ALL_EXPERIENCES_QUERY,
+  GetAllExperiencesQueryType,
+} from "@/queries/experienceEntries";
+import { ExperienceSection } from "@/components/Experience";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const stack: GetAllStackQueryType[] = await client.fetch(GET_ALL_STACK_QUERY);
   const usedTech: GetProgramsQueryType[] =
     await client.fetch(GET_PROGRAMS_QUERY);
+  const experiences: GetAllExperiencesQueryType[] = await client.fetch(
+    GET_ALL_EXPERIENCES_QUERY,
+  );
+  console.log("[getServerSideProps - experiences]", experiences);
 
   return {
     props: {
       stack,
       usedTech,
+      experiences,
     },
   };
 };
@@ -33,7 +42,8 @@ export const getStaticProps = async () => {
 export default function Page({
   stack,
   usedTech,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+  experiences,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <section className="my-4">
       <h1 className="mb-4 text-4xl font-bold text-center"> O sobie </h1>
@@ -92,9 +102,7 @@ export default function Page({
             ))}
           </ul>
         </ArticleCard>
-        <ArticleCard title="Praca">
-          <TimeLine data={["1"]} onClick={(data) => console.log(data)} />
-        </ArticleCard>
+        <ExperienceSection experiences={experiences} />
         <ArticleCard title="Poza pracą">
           <div>
             <p>
