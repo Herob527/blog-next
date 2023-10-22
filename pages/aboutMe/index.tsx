@@ -5,38 +5,19 @@ import {
   ListEntryFa,
   ListEntryImage,
 } from "@/app/components/ArticleCard/ListEntry";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { InferGetStaticPropsType } from "next";
 import { client, urlFor } from "@/components/sanityClient";
 import { TimeLine } from "@/components/Timeline";
+import { GET_STACK_QUERY, GetStackQueryType } from "@/queries/stackEntries";
+import {
+  GET_PROGRAMS_QUERY,
+  GetProgramsQueryType,
+} from "@/queries/programEntries";
 
-type iconType = {
-  asset: {
-    _type: string;
-    _ref: string;
-  };
-  type: string;
-};
-
-type stackEntry = {
-  icon: iconType;
-  title: string;
-};
-
-type techEntry = {
-  name: string;
-  icon: iconType;
-  iconAlt: string;
-  link: string;
-};
-
-type staticProps = {
-  stack: stackEntry[];
-  usedTech: techEntry[];
-};
-
-export const getStaticProps: GetStaticProps<staticProps> = async () => {
-  const stack = await client.fetch('*[_type=="stackEntry"]');
-  const usedTech = await client.fetch('*[_type=="usedPrograms"]');
+export const getStaticProps = async () => {
+  const stack: GetStackQueryType[] = await client.fetch(GET_STACK_QUERY);
+  const usedTech: GetProgramsQueryType[] =
+    await client.fetch(GET_PROGRAMS_QUERY);
 
   return {
     props: {
@@ -47,7 +28,7 @@ export const getStaticProps: GetStaticProps<staticProps> = async () => {
 };
 
 export default function Page({
-  stack: repo,
+  stack,
   usedTech,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
@@ -73,7 +54,7 @@ export default function Page({
         </ArticleCard>
         <ArticleCard title="Stack">
           <ul className="flex relative flex-row flex-wrap gap-8 justify-center items-center mx-auto max-w-sm h-full">
-            {repo.map((entry) => (
+            {stack.map((entry) => (
               <ListEntryImage
                 key={entry.icon.asset._ref}
                 title={entry.title}
@@ -109,7 +90,7 @@ export default function Page({
           </ul>
         </ArticleCard>
         <ArticleCard title="Praca">
-          <TimeLine />
+          <TimeLine data={["1"]} onClick={(data) => console.log(data)} />
         </ArticleCard>
         <ArticleCard title="Poza pracą">
           <div>
