@@ -1,57 +1,49 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
+import React, { useState } from "react";
 
 type Props<T> = {
   data: T[];
+  keyFunc: (data: T) => string;
+  labelFunc?: (data: T) => string;
   onClick: (data: T) => void;
 };
 
-export function TimeLine<T = any>({ data, onClick }: Props<T>) {
-  const divRef = useRef<HTMLDivElement>(null);
-
-  const [containerWidth, setContainerWidth] = useState(0);
-  const isRefDefined = !!divRef.current;
-
-  const refreshWidth = () => {
-    setContainerWidth(divRef.current?.getBoundingClientRect().width || 100);
-  };
-
-  useEffect(() => {
-    refreshWidth();
-  }, [isRefDefined]);
-
-  useEffect(() => {
-    window.addEventListener("resize", refreshWidth);
-  }, []);
+export function TimeLine<T = unknown>({
+  data,
+  keyFunc,
+  labelFunc,
+  onClick,
+}: Props<T>) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleClick = (index: number) => {
     onClick(data[index]);
+    setSelectedIndex(index);
   };
+  console.log("[TimeLine - label]", labelFunc);
+  const generateKey = (data: T) => keyFunc(data);
 
   return (
     <>
-      <div
-        className="relative w-full rounded-xl border-2 border-blue-500"
-        ref={divRef}
-      >
-        {data.map((_, index, arr) => (
+      <div className="flex relative flex-row flex-nowrap justify-around items-center mb-8 w-full">
+        <span className="absolute z-0 w-full h-1 border-t-2 border-b-2 border-blue-500"></span>
+        {data.map((val, index) => (
           <button
-            key={_?.toString()}
+            key={`timeline-${generateKey(val)}`}
             onClick={() => handleClick(index)}
-            style={
-              {
-                "--i": `${index}`,
-                "--arr-length": `${arr.length - 1}`,
-                "--width": `${containerWidth}px`,
-              } as React.CSSProperties
-            }
-            className={`-ml-1 opacity-50 inline-block absolute top-0 left-0 w-6 h-6 bg-white rounded-full border-4 border-blue-500 transition-transform duration-500 cursor-pointer ${
-              arr.length === 1
-                ? "ml-0 left-1/2 -translate-x-1/2"
-                : "translate-x-[calc(var(--width)/(var(--arr-length))*var(--i))] last:-ml-10"
-            } -translate-y-1/2 hover:scale-125 ${index === 0 ? "ml-4" : ""}`}
-          ></button>
+            className="inline-flex z-10 flex-col flex-nowrap items-center sm:translate-y-[16px]"
+          >
+            <span
+              key={`button-timeline-${generateKey(val)}`}
+              className={`inline-block p-2 rounded-full border-4 ${
+                selectedIndex === index
+                  ? "bg-blue-700 border-blue-500"
+                  : "bg-white border-blue-500"
+              } transition-all duration-500 cursor-pointer `}
+            ></span>
+            <span className="whitespace-nowrap">
+              {labelFunc ? labelFunc(val) : ""}
+            </span>
+          </button>
         ))}
       </div>
     </>
