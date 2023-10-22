@@ -7,7 +7,7 @@ import {
 } from "@/app/components/ArticleCard/ListEntry";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { client, urlFor } from "@/components/sanityClient";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { TimeLine } from "@/components/Timeline";
 
 type iconType = {
   asset: {
@@ -50,15 +50,6 @@ export default function Page({
   stack: repo,
   usedTech,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const divRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
-
-  const isRefDefined = !!divRef.current;
-
-  useEffect(() => {
-    setContainerWidth(divRef.current?.getBoundingClientRect().width || 100);
-  }, [isRefDefined]);
-
   return (
     <section className="my-4">
       <h1 className="mb-4 text-4xl font-bold text-center"> O sobie </h1>
@@ -118,27 +109,7 @@ export default function Page({
           </ul>
         </ArticleCard>
         <ArticleCard title="Praca">
-          <div
-            className="relative w-full rounded-xl border-2 border-blue-500"
-            ref={divRef}
-          >
-            {Array(4)
-              .fill(0)
-              .map((_, index) => index)
-              .map((_, index, arr) => (
-                <span
-                  key={_}
-                  style={
-                    {
-                      "--i": `${index}`,
-                      "--arr-length": `${arr.length - 1}`,
-                      "--width": `${containerWidth}px`,
-                    } as React.CSSProperties
-                  }
-                  className={`-ml-1 last:-ml-6 opacity-50 inline-block absolute top-0 left-0 w-6 h-6 bg-white rounded-full border-4 border-blue-500 transition-transform duration-500 cursor-pointer translate-x-[calc(var(--width)/(var(--arr-length))*var(--i))] -translate-y-1/2 hover:scale-125`}
-                ></span>
-              ))}
-          </div>
+          <TimeLine />
         </ArticleCard>
         <ArticleCard title="Poza pracą">
           <div>
