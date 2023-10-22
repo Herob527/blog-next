@@ -8,14 +8,17 @@ import {
 import type { InferGetStaticPropsType } from "next";
 import { client, urlFor } from "@/components/sanityClient";
 import { TimeLine } from "@/components/Timeline";
-import { GET_STACK_QUERY, GetStackQueryType } from "@/queries/stackEntries";
+import {
+  GET_ALL_STACK_QUERY,
+  GetAllStackQueryType,
+} from "@/queries/stackEntries";
 import {
   GET_PROGRAMS_QUERY,
   GetProgramsQueryType,
 } from "@/queries/programEntries";
 
 export const getStaticProps = async () => {
-  const stack: GetStackQueryType[] = await client.fetch(GET_STACK_QUERY);
+  const stack: GetAllStackQueryType[] = await client.fetch(GET_ALL_STACK_QUERY);
   const usedTech: GetProgramsQueryType[] =
     await client.fetch(GET_PROGRAMS_QUERY);
 
