@@ -1,6 +1,6 @@
 import "@/components/globals.css";
 import Layout from "@/components/layout";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 type props = {
   Component: React.JSX.ElementType;
