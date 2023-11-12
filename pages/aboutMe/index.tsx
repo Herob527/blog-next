@@ -5,7 +5,7 @@ import {
   ListEntryFa,
   ListEntryImage,
 } from "@/app/components/ArticleCard/ListEntry";
-import type { InferGetServerSidePropsType } from "next";
+import type { InferGetStaticPropsType } from "next";
 import { client, urlFor } from "@/components/sanityClient";
 import {
   GET_ALL_STACK_QUERY,
@@ -21,14 +21,14 @@ import {
 } from "@/queries/experienceEntries";
 import { ExperienceSection } from "@/components/Experience";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const stack: GetAllStackQueryType[] = await client.fetch(GET_ALL_STACK_QUERY);
   const usedTech: GetProgramsQueryType[] =
     await client.fetch(GET_PROGRAMS_QUERY);
   const experiences: GetAllExperiencesQueryType[] = await client.fetch(
     GET_ALL_EXPERIENCES_QUERY,
   );
-  console.log("[getServerSideProps - experiences]", experiences);
+  console.log("[getStaticProps - experiences]", experiences);
 
   return {
     props: {
@@ -43,7 +43,7 @@ export default function Page({
   stack,
   usedTech,
   experiences,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <section className="pb-4">
       <h1 className="mb-4 text-4xl font-bold text-center"> O sobie </h1>
