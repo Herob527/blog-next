@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="pt-24">
+    <html lang="en" className="bg-mustard-500">
+      <body className="pt-24 min-h-screen bg-mustard-500">
         <nav className="flex fixed top-0 z-50 flex-row flex-wrap gap-4 py-4 px-4 w-screen shadow-lg lg:px-28 bg-mustard">
           <div>
             <Link href="/" className="flex-1">
@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 alt="logo"
                 height={64}
                 width={64}
-                className="rounded-full transition-transform duration-700 ease-in-out hover:scale-125"
+                className="rounded-full transition-transform duration-200 ease-in-out hover:scale-125"
               />
             </Link>
           </div>
