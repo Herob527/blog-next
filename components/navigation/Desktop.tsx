@@ -9,7 +9,7 @@ type Props = {
 
 export const DesktopNavigation = ({ navigationEntries }: Props) => (
   <div className="hidden z-50 flex-row flex-1 gap-16 justify-end items-center p-4 h-full md:flex lg:px-28 bg-mustard">
-    <div className="hidden flex-row flex-1 gap-16 justify-end items-center md:flex">
+    <div className="hidden flex-row flex-1 gap-8 justify-end items-center md:flex">
       <Link href="/" className="flex-1">
         <Image
           src={luna}
@@ -20,7 +20,11 @@ export const DesktopNavigation = ({ navigationEntries }: Props) => (
         />
       </Link>
       {navigationEntries.map((entry) => (
-        <Link href={entry.href} key={entry.key}>
+        <Link
+          href={entry.href}
+          key={entry.key}
+          className="border-b-2 border-b-transparent hover:border-b-mustard-300"
+        >
           {entry.text}
         </Link>
       ))}
