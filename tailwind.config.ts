@@ -69,6 +69,19 @@ const config: Config = {
           800: "#fff4b6",
           900: "#fff9da",
         },
+
+        "mustard-transparent": {
+          DEFAULT: "#ffe347dd",
+          100: "#413700dd",
+          200: "#836f00dd",
+          300: "#c4a600dd",
+          400: "#ffda06dd",
+          500: "#ffe347dd",
+          600: "#ffe96cdd",
+          700: "#ffee91dd",
+          800: "#fff4b6dd",
+          900: "#fff9dadd",
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
