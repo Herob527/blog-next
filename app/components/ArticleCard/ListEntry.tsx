@@ -12,7 +12,7 @@ type props = {
 const ListEntryFa = ({ title, icon }: props) => {
   return (
     <li className="flex flex-col gap-2 items-center text-center">
-      <FontAwesomeIcon icon={icon} width={32} height={32} />
+      <FontAwesomeIcon icon={icon} className="text-2xl" />
       <span>{title}</span>
     </li>
   );
