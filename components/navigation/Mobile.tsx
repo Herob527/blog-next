@@ -20,7 +20,7 @@ export const MobileNavigation = ({ navigationEntries }: Props) => {
   return (
     <div>
       <div className="flex fixed top-0 right-0 z-50 flex-row flex-1 justify-between items-center p-4 w-full text-right shadow-lg md:hidden bg-mustard">
-        <Link href="/" className="flex-1">
+        <Link href="/" className="flex-1" onClick={() => setIsHidden(true)}>
           <Image
             src={luna}
             alt="logo"
@@ -37,14 +37,14 @@ export const MobileNavigation = ({ navigationEntries }: Props) => {
         </button>
       </div>
       <div
-        className="inline-flex mt-24 fixed top-0 left-0 flex-col gap-4 data-[hidden='true']:-translate-x-full data-[hidden='false']:translate-x-0 transition-transform w-full h-full bg-mustard-transparent backdrop-blur p-4"
+        className="flex mt-24 fixed top-0 left-0 flex-col gap-4 data-[hidden='true']:-translate-x-full data-[hidden='false']:translate-x-0 transition-transform w-full h-full bg-mustard-transparent backdrop-blur p-4"
         data-hidden={`${isHidden}`}
       >
         {navigationEntries.map((entry) => (
           <Link
             href={entry.href}
             key={entry.key}
-            className="inline-flex gap-2 items-center w-max text-xl"
+            className="flex gap-2 justify-between items-center text-xl"
             onClick={() => setIsHidden(true)}
           >
             <span>{entry.text}</span>
