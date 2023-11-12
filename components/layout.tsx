@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="bg-mustard-500">
       <body className="pt-32 min-h-screen bg-mustard-500">
-        <nav className="flex fixed top-0 z-50 flex-row flex-wrap gap-4 w-screen shadow-lg">
+        <nav className="flex fixed top-0 z-50 flex-row flex-wrap gap-4 w-screen">
           <DesktopNavigation navigationEntries={navigationEntries} />
           <MobileNavigation navigationEntries={navigationEntries} />
         </nav>
