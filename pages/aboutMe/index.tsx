@@ -45,7 +45,7 @@ export default function Page({
   experiences,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <section className="py-4">
+    <section className="pb-4">
       <h1 className="mb-4 text-4xl font-bold text-center"> O sobie </h1>
       <div className="flex flex-col flex-wrap gap-6">
         <ArticleCard title="Na wstępie">
