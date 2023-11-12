@@ -45,7 +45,7 @@ export default function Page({
   experiences,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <section className="my-4">
+    <section className="py-4">
       <h1 className="mb-4 text-4xl font-bold text-center"> O sobie </h1>
       <div className="flex flex-col flex-wrap gap-6">
         <ArticleCard title="Na wstępie">
@@ -115,9 +115,12 @@ export default function Page({
             </p>
             <p>
               Poza tym jestem też administratorem serwera{" "}
-              <Link href="https://discord.gg/hA92UMVzmM">
-                {" "}
-                Discord &quot;Społeczność Mekatrona&quot;,
+              <Link
+                href="https://discord.gg/hA92UMVzmM"
+                className="text-blue-500 underline"
+                target="_blank"
+              >
+                Discord &quot;Społeczność Mekatrona&quot;
               </Link>{" "}
               która skupia się wokół artystycznego wykorzystania AI
             </p>
