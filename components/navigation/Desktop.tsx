@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const DesktopNavigation = ({ navigationEntries }: Props) => (
-  <div className="hidden z-50 flex-row flex-1 gap-16 justify-end items-center p-4 h-full md:flex lg:px-28 bg-mustard">
+  <div className="hidden z-50 flex-row flex-1 gap-16 justify-end items-center p-4 h-full shadow-lg md:flex lg:px-28 bg-mustard">
     <div className="hidden flex-row flex-1 gap-8 justify-end items-center md:flex">
       <Link href="/" className="flex-1">
         <Image
